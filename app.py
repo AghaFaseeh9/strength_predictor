@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib
 matplotlib.use('Agg')  # Set the backend to Agg
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
