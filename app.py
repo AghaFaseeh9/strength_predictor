@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-plt.switch_backend('agg')  # Switch to non-interactive backend
+plt.switch_backend('agg') 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestRegressor
@@ -17,7 +17,7 @@ st.set_page_config(
     page_title="Self-Healing Concrete Strength Predictor",
     page_icon="🏗️",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # Custom CSS
@@ -25,7 +25,7 @@ st.markdown(
     """
     <style>
     .main {
-        padding: 2rem;
+        padding: 1rem;
     }
     .stButton>button {
         width: 100%;
@@ -39,6 +39,45 @@ st.markdown(
     }
     .css-1d391kg {
         padding: 1rem;
+    }
+    
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+        .main {
+            padding: 0.5rem;
+        }
+        .stMarkdown {
+            font-size: 0.9em;
+        }
+        .stDataFrame {
+            font-size: 0.8em;
+        }
+        .stSelectbox, .stSlider {
+            font-size: 0.9em;
+        }
+        .stButton>button {
+            padding: 0.4rem;
+            font-size: 0.9em;
+        }
+        .stExpander {
+            font-size: 0.9em;
+        }
+        .stSidebar {
+            padding: 0.5rem;
+        }
+    }
+    
+    /* Improve table readability on mobile */
+    @media (max-width: 768px) {
+        .stMarkdown table {
+            font-size: 0.8em;
+            width: 100%;
+            display: block;
+            overflow-x: auto;
+        }
+        .stMarkdown th, .stMarkdown td {
+            padding: 0.3rem;
+        }
     }
     </style>
     """,
@@ -154,12 +193,11 @@ with st.sidebar:
     st.header("Data Management")
     
     # Data Format Guide
-    with st.expander("📋 Data Format Guide", expanded=True):
+    with st.expander("📋 Data Format Guide", expanded=False):
+        st.markdown("### Required Excel File Format:")
+        st.markdown("Your Excel file should contain the following columns:")
+        
         st.markdown("""
-        ### Required Excel File Format:
-        
-        Your Excel file should contain the following columns:
-        
         | Column Name | Description | Type |
         |------------|-------------|------|
         | SNO | Serial Number | Number |
@@ -171,13 +209,17 @@ with st.sidebar:
         | Curing_Days | Number of Curing Days | Number |
         | Fiber_Type | Type of Fiber Used | Text |
         | Strength_MPa | Compressive Strength | Number |
+        """)
         
-        ### Example Values:
+        st.markdown("### Example Values:")
+        st.markdown("""
         - **MA**: Fly Ash, GGBS, Silica Fume
         - **TE**: Indoor, Outdoor, Marine
         - **Fiber_Type**: Steel, Glass, Polypropylene
+        """)
         
-        ### Notes:
+        st.markdown("### Notes:")
+        st.markdown("""
         - All numerical values should be positive
         - PMA should be between 0-100
         - PCA should be between 0-10
