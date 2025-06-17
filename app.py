@@ -16,7 +16,7 @@ st.set_page_config(
     page_title="Self-Healing Concrete Strength Predictor",
     page_icon="🏗️",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # Custom CSS
@@ -153,12 +153,11 @@ with st.sidebar:
     st.header("Data Management")
     
     # Data Format Guide
-    with st.expander("📋 Data Format Guide", expanded=True):
+    with st.expander("📋 Data Format Guide", expanded=False):
+        st.markdown("### Required Excel File Format:")
+        st.markdown("Your Excel file should contain the following columns:")
+        
         st.markdown("""
-        ### Required Excel File Format:
-        
-        Your Excel file should contain the following columns:
-        
         | Column Name | Description | Type |
         |------------|-------------|------|
         | SNO | Serial Number | Number |
@@ -170,13 +169,17 @@ with st.sidebar:
         | Curing_Days | Number of Curing Days | Number |
         | Fiber_Type | Type of Fiber Used | Text |
         | Strength_MPa | Compressive Strength | Number |
+        """)
         
-        ### Example Values:
+        st.markdown("### Example Values:")
+        st.markdown("""
         - **MA**: Fly Ash, GGBS, Silica Fume
         - **TE**: Indoor, Outdoor, Marine
         - **Fiber_Type**: Steel, Glass, Polypropylene
+        """)
         
-        ### Notes:
+        st.markdown("### Notes:")
+        st.markdown("""
         - All numerical values should be positive
         - PMA should be between 0-100
         - PCA should be between 0-10
